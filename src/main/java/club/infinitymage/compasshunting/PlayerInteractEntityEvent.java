@@ -23,8 +23,8 @@ public class PlayerInteractEntityEvent implements Listener {
 
             if (!event.getRightClicked().getType().equals(EntityType.PLAYER)) return;
 
-            UUID p = event.getPlayer().getUniqueId();
-            UUID target = event.getRightClicked().getUniqueId();
+            String p = event.getPlayer().getName();
+            String target = event.getRightClicked().getName();
 
             TrackingManager.addTracking(p, target);
             event.getPlayer().sendMessage(Util.format("&2Now tracking &e"+event.getRightClicked().getName()+"&2."));

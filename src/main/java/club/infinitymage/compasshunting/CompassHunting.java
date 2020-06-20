@@ -1,9 +1,6 @@
 package club.infinitymage.compasshunting;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -31,41 +28,58 @@ public class CompassHunting extends JavaPlugin implements Listener {
                 while (it.hasNext()) {
 
                     Map.Entry pair = (Map.Entry) it.next();
-                    Player p = getServer().getPlayer((UUID) pair.getKey());
-                    Player target = getServer().getPlayer((UUID) pair.getValue());
-                    p.setCompassTarget(target.getLocation());
-                    ItemStack handItem = p.getInventory().getItemInMainHand();
+                    Player p = getServer().getPlayer((String) pair.getKey());
+                    Player target = getServer().getPlayer((String) pair.getValue());
 
-                    if (handItem.getType() == Material.COMPASS && handItem.getItemMeta().getDisplayName().equals(ChatColor.BLUE+"Player Tracker")) {
+                    if (target == null) {
 
+                        ItemStack handItem = p.getInventory().getItemInMainHand();
                         ItemMeta compassMeta = handItem.getItemMeta();
-
-                        String pWorld = p.getWorld().getName();
-                        String targetWorld = target.getWorld().getName();
-
-                        String targetDistance = "";
-
-                        if (pWorld.equals(targetWorld)) {
-                            String trueDistance = String.valueOf((int) p.getLocation().distance(target.getLocation()));
-                            targetDistance = trueDistance + "m";
-                        }
-                        else if (targetWorld.equals("world")) targetDistance = Util.format("&7Target is in the &aOverworld");
-                        else if (targetWorld.equals("world_nether")) targetDistance = Util.format("&7Target is in &cThe Nether");
-                        else if (targetWorld.equals("world_the_end")) targetDistance = Util.format("&7Target is in &5The End");
-                        else targetDistance = Util.format("&7Target is in a different world.");
-
-
 
                         List<String> compassLoreLines = new ArrayList<String>();
                         compassLoreLines.add(Util.format("&7Currently tracking:"));
-                        compassLoreLines.add(Util.format("&c"+target.getName()));
+                        compassLoreLines.add(Util.format("&c"+pair.getValue()));
                         compassLoreLines.add(Util.format(""));
-                        if (pWorld.equals(targetWorld)) compassLoreLines.add(Util.format("&7Distance to target:"));
-                        compassLoreLines.add(Util.format("&2"+targetDistance));
+                        compassLoreLines.add(Util.format("&7Target is offline."));
 
                         compassMeta.setLore(compassLoreLines);
                         handItem.setItemMeta(compassMeta);
 
+                        p.setCompassTarget(new Location(p.getWorld(), 0, 64, 0));
+                    }
+                    else if (p != null) {
+                        p.setCompassTarget(target.getLocation());
+
+                        ItemStack handItem = p.getInventory().getItemInMainHand();
+                        ItemMeta compassMeta = handItem.getItemMeta();
+
+                        if (handItem.getType() == Material.COMPASS && handItem.getItemMeta().getDisplayName().equals(ChatColor.BLUE+"Player Tracker")) {
+
+                            String pWorld = p.getWorld().getName();
+                            String targetWorld = target.getWorld().getName();
+
+                            String targetDistance = "";
+
+                            if (pWorld.equals(targetWorld)) {
+                                String trueDistance = String.valueOf((int) p.getLocation().distance(target.getLocation()));
+                                targetDistance = trueDistance + "m";
+                            }
+                            else if (targetWorld.equals("world")) targetDistance = Util.format("&7Target is in the &aOverworld");
+                            else if (targetWorld.equals("world_nether")) targetDistance = Util.format("&7Target is in &cThe Nether");
+                            else if (targetWorld.equals("world_the_end")) targetDistance = Util.format("&7Target is in &5The End");
+                            else targetDistance = Util.format("&7Target is in a different world.");
+
+                            List<String> compassLoreLines = new ArrayList<String>();
+                            compassLoreLines.add(Util.format("&7Currently tracking:"));
+                            compassLoreLines.add(Util.format("&c"+target.getName()));
+                            compassLoreLines.add(Util.format(""));
+                            if (pWorld.equals(targetWorld)) compassLoreLines.add(Util.format("&7Distance to target:"));
+                            compassLoreLines.add(Util.format("&2"+targetDistance));
+
+                            compassMeta.setLore(compassLoreLines);
+                            handItem.setItemMeta(compassMeta);
+
+                        }
                     }
                 }
             }

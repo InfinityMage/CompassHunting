@@ -1,5 +1,5 @@
 name: CompassHunting
-version: 1.0.0
+version: 1.0
 author: InfinityMage
 description: Track other players using compasses!
 main: club.infinitymage.compasshunting.CompassHunting
