@@ -1,4 +1,4 @@
-package club.infinitymage.compasshunting;
+package club.infinitymage.compasshunting.util;
 
 import org.bukkit.ChatColor;
 

@@ -1,5 +1,10 @@
 package club.infinitymage.compasshunting;
 
+import club.infinitymage.compasshunting.commands.GiveCompassCommand;
+import club.infinitymage.compasshunting.commands.TrackCommand;
+import club.infinitymage.compasshunting.listeners.PlayerInteractEntityEvent;
+import club.infinitymage.compasshunting.managers.TrackingManager;
+import club.infinitymage.compasshunting.util.Util;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;

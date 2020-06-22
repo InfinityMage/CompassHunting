@@ -1,5 +1,7 @@
-package club.infinitymage.compasshunting;
+package club.infinitymage.compasshunting.listeners;
 
+import club.infinitymage.compasshunting.managers.TrackingManager;
+import club.infinitymage.compasshunting.util.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;

@@ -1,4 +1,4 @@
-package club.infinitymage.compasshunting;
+package club.infinitymage.compasshunting.managers;
 
 import java.util.HashMap;
 import java.util.Map;

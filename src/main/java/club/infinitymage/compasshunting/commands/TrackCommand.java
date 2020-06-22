@@ -1,5 +1,8 @@
-package club.infinitymage.compasshunting;
+package club.infinitymage.compasshunting.commands;
 
+import club.infinitymage.compasshunting.CompassHunting;
+import club.infinitymage.compasshunting.managers.TrackingManager;
+import club.infinitymage.compasshunting.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
