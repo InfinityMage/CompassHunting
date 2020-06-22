@@ -15,12 +15,15 @@ CompassHunting has several features to make it as useful as possible, including:
 | Command | Description | Permissions |
 |:---|:---|:---|
 | `/givecompass [player]` | Give a tracking compass to a specific player (defaults to command sender) | `compasshunting.give`
+| `/track {target} [hunter]` | Manually track players instead of right-clicking on them | `compasshunting.track.command`, `compasshunting.track.others`
 
 ### Permissions
 | Permission | Description |
 |:---|:---|
 | `compasshunting.give` | Allow access to use the `/givecompass` command
 | `compasshunting.track` | Allow the player to right-click on another player with a tracking compass to begin targetting them
+| `compasshunting.track.command` | Allow access to use the `/track` command. This only allows access to set the target for yourself - to be able to manually set both the hunter and the target, the permission node `compasshunting.track.others` is required
+| `compasshunting.track.others` | Allow access to use the `/track` command to set both the hunter and the target
 
 #### Credits
 [@InfinityMage](https://github.com/InfinityMage) and [@Error-204](https://github.com/Error-204)
