@@ -8,7 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.sound.midi.Track;
 import java.util.*;
 
 public class CompassHunting extends JavaPlugin implements Listener {
