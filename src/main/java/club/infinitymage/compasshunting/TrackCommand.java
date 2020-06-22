@@ -31,7 +31,7 @@ public class TrackCommand implements CommandExecutor {
                 sender.sendMessage(Util.format("&cYou must specify two arguments as the console: /track {target} {player}"));
             } else {
                 Player p = (Player) sender;
-                if (p.hasPermission("compasshunting.track.command")) {
+                if (p.hasPermission("compasshunting.track.command") || p.hasPermission("compasshunting.track.others")) {
                     Player target = Bukkit.getServer().getPlayer(args[0]);
                     if (target != null) {
                         TrackingManager.addTracking(p.getName(), target.getName());
