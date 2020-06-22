@@ -1,6 +1,5 @@
 package club.infinitymage.compasshunting;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -8,8 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
-
-import java.util.UUID;
 
 public class PlayerInteractEntityEvent implements Listener {
 

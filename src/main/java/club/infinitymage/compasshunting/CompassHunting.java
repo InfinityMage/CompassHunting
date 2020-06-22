@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.sound.midi.Track;
 import java.util.*;
 
 public class CompassHunting extends JavaPlugin implements Listener {
@@ -18,6 +19,7 @@ public class CompassHunting extends JavaPlugin implements Listener {
         PluginManager pm = Bukkit.getPluginManager();
 
         this.getCommand("givecompass").setExecutor(new GiveCompassCommand(this));
+        this.getCommand("track").setExecutor(new TrackCommand(this));
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractEntityEvent(), this);
 
@@ -31,21 +33,25 @@ public class CompassHunting extends JavaPlugin implements Listener {
                     Player p = getServer().getPlayer((String) pair.getKey());
                     Player target = getServer().getPlayer((String) pair.getValue());
 
-                    if (target == null) {
+                    if (target == null && p != null) {
 
                         ItemStack handItem = p.getInventory().getItemInMainHand();
                         ItemMeta compassMeta = handItem.getItemMeta();
 
-                        List<String> compassLoreLines = new ArrayList<String>();
-                        compassLoreLines.add(Util.format("&7Currently tracking:"));
-                        compassLoreLines.add(Util.format("&c"+pair.getValue()));
-                        compassLoreLines.add(Util.format(""));
-                        compassLoreLines.add(Util.format("&7Target is offline."));
+                        if (compassMeta != null && handItem.getType() == Material.COMPASS && compassMeta.getDisplayName().equals(ChatColor.BLUE+"Player Tracker")) {
 
-                        compassMeta.setLore(compassLoreLines);
-                        handItem.setItemMeta(compassMeta);
+                            List<String> compassLoreLines = new ArrayList<String>();
+                            compassLoreLines.add(Util.format("&7Currently tracking:"));
+                            compassLoreLines.add(Util.format("&c" + pair.getValue()));
+                            compassLoreLines.add(Util.format(""));
+                            compassLoreLines.add(Util.format("&7Target is offline."));
 
-                        p.setCompassTarget(new Location(p.getWorld(), 0, 64, 0));
+                            compassMeta.setLore(compassLoreLines);
+                            handItem.setItemMeta(compassMeta);
+
+                            p.setCompassTarget(new Location(p.getWorld(), 0, 64, 0));
+
+                        }
                     }
                     else if (p != null) {
                         p.setCompassTarget(target.getLocation());
